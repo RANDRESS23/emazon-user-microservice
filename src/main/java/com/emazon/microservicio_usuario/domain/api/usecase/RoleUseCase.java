@@ -1,4 +1,4 @@
-package com.emazon.microservicio_usuario.domain.api.use_case;
+package com.emazon.microservicio_usuario.domain.api.usecase;
 
 import com.emazon.microservicio_usuario.domain.api.IRoleServicePort;
 import com.emazon.microservicio_usuario.domain.exception.AlreadyExistsFieldException;
