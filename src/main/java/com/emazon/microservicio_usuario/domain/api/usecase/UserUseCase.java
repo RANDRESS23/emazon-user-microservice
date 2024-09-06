@@ -21,21 +21,21 @@ public class UserUseCase implements IUserServicePort {
 
     @Override
     public void saveAuxBodegaUser(User user) {
-        if (userPersistencePort.getAuxBodegaUserByDocument(user.getDocument()).isPresent()) {
+        if (userPersistencePort.getUserByDocument(user.getDocument()).isPresent()) {
             throw new AlreadyExistsFieldException(DomainConstants.DOCUMENT_ALREADY_EXISTS_MESSAGE);
         }
 
-        if (userPersistencePort.getAuxBodegaUserByEmail(user.getEmail()).isPresent()) {
+        if (userPersistencePort.getUserByEmail(user.getEmail()).isPresent()) {
             throw new AlreadyExistsFieldException(DomainConstants.EMAIL_ALREADY_EXISTS_MESSAGE);
         }
 
-        if (userPersistencePort.getAuxBodegaUserByPhone(user.getPhone()).isPresent()) {
+        if (userPersistencePort.getUserByPhone(user.getPhone()).isPresent()) {
             throw new AlreadyExistsFieldException(DomainConstants.PHONE_ALREADY_EXISTS_MESSAGE);
         }
 
         userValidation.validateUser(user);
         String encryptedPassword = encryptionPersistencePort.encodePassword(user.getPassword());
         user.setPassword(encryptedPassword);
-        userPersistencePort.saveAuxBodegaUser(user);
+        userPersistencePort.saveUser(user);
     }
 }
