@@ -2,6 +2,7 @@ package com.emazon.microservicio_usuario.domain.api.usecase;
 
 import com.emazon.microservicio_usuario.domain.api.IRoleServicePort;
 import com.emazon.microservicio_usuario.domain.exception.AlreadyExistsFieldException;
+import com.emazon.microservicio_usuario.domain.exception.NotFoundException;
 import com.emazon.microservicio_usuario.domain.model.Role;
 import com.emazon.microservicio_usuario.domain.spi.IRolePersistencePort;
 import com.emazon.microservicio_usuario.domain.util.DomainConstants;
@@ -28,6 +29,7 @@ public class RoleUseCase implements IRoleServicePort {
 
     @Override
     public Role getRole(String name) {
-        return null;
+        return rolePersistencePort.getRoleByName(name)
+                .orElseThrow(() -> new NotFoundException(DomainConstants.ROLE_NOT_FOUND));
     }
 }
