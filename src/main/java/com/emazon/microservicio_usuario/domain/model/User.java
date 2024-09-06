@@ -1,12 +1,8 @@
 package com.emazon.microservicio_usuario.domain.model;
 
-import com.emazon.microservicio_usuario.domain.exception.EmptyFieldException;
-import com.emazon.microservicio_usuario.domain.exception.InvalidFieldException;
 import com.emazon.microservicio_usuario.domain.util.DomainConstants;
 
 import java.time.LocalDate;
-import java.time.Period;
-import java.util.regex.Pattern;
 
 import static java.util.Objects.requireNonNull;
 
@@ -16,12 +12,12 @@ public class User {
     private final String lastName;
     private final String document;
     private final String phone;
-    private final LocalDate birthdate;
+    private LocalDate birthdate;
     private final String email;
     private String password;
     private Role role;
 
-    private User(UserBuilder builder) {
+    public User(UserBuilder builder) {
         this.userId = builder.userId;
         this.name = requireNonNull(builder.name, DomainConstants.FIELD_NAME_NULL_MESSAGE);
         this.lastName = requireNonNull(builder.lastName, DomainConstants.FIELD_LASTNAME_NULL_MESSAGE);
@@ -128,6 +124,10 @@ public class User {
 
     public Role getRole() {
         return role;
+    }
+
+    public void setBirthdate(LocalDate birthdate) {
+        this.birthdate = birthdate;
     }
 
     public void setPassword(String password) {
