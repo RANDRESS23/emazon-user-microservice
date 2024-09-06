@@ -5,8 +5,8 @@ import com.emazon.microservicio_usuario.domain.model.User;
 import java.util.Optional;
 
 public interface IUserPersistencePort {
-    void saveAuxBodegaUser(User user);
-    Optional<User> getAuxBodegaUserByDocument(String name);
-    Optional<User> getAuxBodegaUserByEmail(String email);
-    Optional<User> getAuxBodegaUserByPhone(String phone);
+    void saveUser(User user);
+    Optional<User> getUserByDocument(String name);
+    Optional<User> getUserByEmail(String email);
+    Optional<User> getUserByPhone(String phone);
 }
