@@ -2,6 +2,7 @@ package com.emazon.microservicio_usuario.domain.validation;
 
 import com.emazon.microservicio_usuario.domain.exception.EmptyFieldException;
 import com.emazon.microservicio_usuario.domain.exception.InvalidFieldException;
+import com.emazon.microservicio_usuario.domain.exception.MaxLengthException;
 import com.emazon.microservicio_usuario.domain.model.User;
 import com.emazon.microservicio_usuario.domain.util.DomainConstants;
 
@@ -24,11 +25,19 @@ public class UserValidation {
         if (name.trim().isEmpty()) {
             throw new EmptyFieldException(DomainConstants.Field.NAME.toString());
         }
+
+        if (name.trim().length() > DomainConstants.MAXIMUM_USER_NAME_CHARACTERS) {
+            throw new MaxLengthException(DomainConstants.MAXIMUM_USER_NAME_CHARACTERS_MESSAGE);
+        }
     }
 
     private void validateLastNameUser(String lastName) {
         if (lastName.trim().isEmpty()) {
             throw new EmptyFieldException(DomainConstants.Field.LASTNAME.toString());
+        }
+
+        if (lastName.trim().length() > DomainConstants.MAXIMUM_USER_LASTNAME_CHARACTERS) {
+            throw new MaxLengthException(DomainConstants.MAXIMUM_USER_LASTNAME_CHARACTERS_MESSAGE);
         }
     }
 
@@ -55,6 +64,10 @@ public class UserValidation {
     private void validatePhoneUser(String phone) {
         if (phone.trim().isEmpty()) {
             throw new EmptyFieldException(DomainConstants.Field.PHONE.toString());
+        }
+
+        if (phone.trim().length() > DomainConstants.MAXIMUM_USER_PHONE_CHARACTERS) {
+            throw new MaxLengthException(DomainConstants.MAXIMUM_USER_PHONE_CHARACTERS_MESSAGE);
         }
 
         if (!Pattern.matches(DomainConstants.PHONE_REGEX, phone)) {
