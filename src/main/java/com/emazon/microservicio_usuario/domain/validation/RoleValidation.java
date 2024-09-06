@@ -1,6 +1,7 @@
 package com.emazon.microservicio_usuario.domain.validation;
 
 import com.emazon.microservicio_usuario.domain.exception.EmptyFieldException;
+import com.emazon.microservicio_usuario.domain.exception.MaxLengthException;
 import com.emazon.microservicio_usuario.domain.model.Role;
 import com.emazon.microservicio_usuario.domain.util.DomainConstants;
 
@@ -19,6 +20,10 @@ public class RoleValidation {
     private void validateDescriptionRole(String description) {
         if (description.trim().isEmpty()) {
             throw new EmptyFieldException(DomainConstants.Field.DESCRIPTION.toString());
+        }
+
+        if (description.trim().length() > DomainConstants.MAXIMUM_ROLE_DESCRIPTION_CHARACTERS) {
+            throw new MaxLengthException(DomainConstants.MAXIMUM_ROLE_DESCRIPTION_CHARACTERS_MESSAGE);
         }
     }
 }
