@@ -35,18 +35,18 @@ public class UserAdapter implements IUserPersistencePort {
     @Override
     public Optional<User> getUserByDocument(String name) {
         return userRepository.findByDocument(name)
-                .map(userEntityMapper::toDomainModel);
+                .map(IUserEntityMapper::toDomainModel);
     }
 
     @Override
     public Optional<User> getUserByEmail(String email) {
         return userRepository.findByEmail(email)
-                .map(userEntityMapper::toDomainModel);
+                .map(IUserEntityMapper::toDomainModel);
     }
 
     @Override
     public Optional<User> getUserByPhone(String phone) {
         return userRepository.findByPhone(phone)
-                .map(userEntityMapper::toDomainModel);
+                .map(IUserEntityMapper::toDomainModel);
     }
 }
