@@ -1,8 +1,6 @@
 package com.emazon.microservicio_usuario.domain.validation;
 
-import com.emazon.microservicio_usuario.domain.exception.EmptyFieldException;
-import com.emazon.microservicio_usuario.domain.exception.InvalidFieldException;
-import com.emazon.microservicio_usuario.domain.exception.MaxLengthException;
+import com.emazon.microservicio_usuario.domain.exception.*;
 import com.emazon.microservicio_usuario.domain.model.User;
 import com.emazon.microservicio_usuario.domain.util.DomainConstants;
 
