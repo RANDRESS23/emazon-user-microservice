@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = DrivenConstants.USERS_TABLE_NAME)
 @AllArgsConstructor
@@ -33,8 +35,7 @@ public class UserEntity {
     private String phone;
 
     @Column(name = DrivenConstants.COLUMN_USER_BIRTHDATE, nullable = false)
-    @Pattern(regexp = DrivenConstants.BIRTHDATE_REGEX, message = DrivenConstants.INVALID_BIRTHDATE)
-    private String birthdate;
+    private LocalDate birthdate;
 
     @Column(name = DrivenConstants.COLUMN_USER_EMAIL, nullable = false, unique = true)
     @Pattern(regexp = DrivenConstants.EMAIL_REGEX, message = DrivenConstants.INVALID_EMAIL)
