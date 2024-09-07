@@ -4,9 +4,9 @@ import com.emazon.microservicio_usuario.adapters.driving.dto.request.AddUserRequ
 import com.emazon.microservicio_usuario.adapters.driving.dto.response.UserResponse;
 import com.emazon.microservicio_usuario.adapters.driving.mapper.IUserRequestMapper;
 import com.emazon.microservicio_usuario.adapters.driving.mapper.IUserResponseMapper;
-import com.emazon.microservicio_usuario.adapters.driving.util.DrivingConstants;
 import com.emazon.microservicio_usuario.domain.api.IRoleServicePort;
 import com.emazon.microservicio_usuario.domain.api.IUserServicePort;
+import com.emazon.microservicio_usuario.domain.enums.RoleEnum;
 import com.emazon.microservicio_usuario.domain.model.Role;
 import com.emazon.microservicio_usuario.domain.model.User;
 import jakarta.validation.Valid;
@@ -23,14 +23,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class UserRestController {
     private final IUserServicePort userServicePort;
-    private final IUserRequestMapper userRequestMapper;
     private final IUserResponseMapper userResponseMapper;
     private final IRoleServicePort roleServicePort;
 
     @PostMapping("/aux-bodega-user")
     public ResponseEntity<UserResponse> addAuxBodegaUser(@Valid @RequestBody AddUserRequest request) {
-        User user = userRequestMapper.addRequestToUser(request);
-        Role role = roleServicePort.getRole(DrivingConstants.AUX_BODEGA_USER_ROLE);
+        User user = IUserRequestMapper.addRequestToUser(request);
+        Role role = roleServicePort.getRole(RoleEnum.AUX_BODEGA);
 
         user.setRole(role);
         userServicePort.saveAuxBodegaUser(user);
