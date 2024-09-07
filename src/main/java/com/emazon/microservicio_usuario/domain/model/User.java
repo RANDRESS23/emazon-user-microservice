@@ -26,7 +26,7 @@ public class User {
         this.birthdate = requireNonNull(builder.birthdate, DomainConstants.FIELD_BIRTHDATE_NULL_MESSAGE);
         this.email = requireNonNull(builder.email, DomainConstants.FIELD_EMAIL_NULL_MESSAGE);
         this.password = requireNonNull(builder.password, DomainConstants.FIELD_PASSWORD_NULL_MESSAGE);
-        this.role = requireNonNull(builder.role, DomainConstants.FIELD_ROLE_NULL_MESSAGE);
+        this.role = builder.role;
     }
 
     public static class UserBuilder {
