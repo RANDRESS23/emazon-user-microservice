@@ -8,5 +8,16 @@ import org.mapstruct.Mapper;
 public interface IUserEntityMapper {
     UserEntity toEntity(User user);
 
-    User toDomainModel(UserEntity userEntity);
+    public static User toDomainModel(UserEntity userEntity) {
+        return new User.UserBuilder()
+                .userId(userEntity.getUserId())
+                .name(userEntity.getName())
+                .lastName(userEntity.getLastName())
+                .document(userEntity.getDocument())
+                .phone(userEntity.getPhone())
+                .birthdate(userEntity.getBirthdate())
+                .email(userEntity.getEmail())
+                .password(userEntity.getPassword())
+                .build();
+    }
 }
