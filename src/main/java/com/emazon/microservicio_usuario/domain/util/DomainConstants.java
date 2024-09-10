@@ -45,4 +45,6 @@ public class DomainConstants {
     public static final String DOCUMENT_ALREADY_EXISTS_MESSAGE = "Document already exists.";
     public static final String EMAIL_ALREADY_EXISTS_MESSAGE = "Email already exists.";
     public static final String PHONE_ALREADY_EXISTS_MESSAGE = "Phone already exists.";
+
+    public static final String INVALID_CREDENTIALS_MESSAGE = "Invalid credentials.";
 }
