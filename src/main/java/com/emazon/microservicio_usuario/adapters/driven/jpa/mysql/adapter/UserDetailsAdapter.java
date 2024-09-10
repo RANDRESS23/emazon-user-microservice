@@ -22,13 +22,13 @@ public class UserDetailsAdapter implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity userEntity = userRepository.findByDocument(username)
+        UserEntity userEntity = userRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException(DrivenConstants.USER_NOT_FOUND_MESSAGE));
 
         List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
         RoleEntity role = userEntity.getRole();
 
-        authorityList.add(new SimpleGrantedAuthority("ROLE_".concat(role.getName().name())));
+        authorityList.add(new SimpleGrantedAuthority(role.getName().name()));
 
         role.getPermissionList().forEach(permission ->
                 authorityList.add(new SimpleGrantedAuthority(permission.getName().name()))
