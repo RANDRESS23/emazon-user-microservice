@@ -8,13 +8,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = DrivenConstants.PERMISSIONS_TABLE_NAME)
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
-public class PermissionEntity {
+public class PermissionEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long permissionId;
