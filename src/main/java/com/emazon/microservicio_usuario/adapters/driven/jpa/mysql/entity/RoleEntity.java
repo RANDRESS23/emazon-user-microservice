@@ -8,7 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet;
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
@@ -17,7 +17,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Data
 @Builder
-public class RoleEntity {
+public class RoleEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = DrivenConstants.COLUMN_ROLE_ID)
@@ -32,5 +32,5 @@ public class RoleEntity {
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(name = DrivenConstants.ROLE_PERMISSIONS_TABLE_NAME, joinColumns = @JoinColumn(name = DrivenConstants.COLUMN_ROLE_ID), inverseJoinColumns = @JoinColumn(name = DrivenConstants.COLUMN_PERMISSION_ID))
-    private Set<PermissionEntity> permissionList = new HashSet<>();
+    private Set<PermissionEntity> permissionList;
 }
