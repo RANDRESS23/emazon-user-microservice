@@ -29,6 +29,9 @@ public class DrivenConstants {
     public static final String ROLES_TABLE_NAME = "role";
     public static final String COLUMN_ROLE_DESCRIPTION = "description";
 
+    public static final String USER_ID_FIELD = "userId";
+    public static final String ROLE_FIELD = "role";
+
     public static final String PERMISSIONS_TABLE_NAME = "permissions";
     public static final String COLUMN_PERMISSION_NAME = "name";
 

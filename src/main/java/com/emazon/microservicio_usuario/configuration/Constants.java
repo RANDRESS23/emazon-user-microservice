@@ -13,4 +13,7 @@ public class Constants {
     public static final String DESCRIPTION_ROLE_ADMIN = "Usuario con permisos completos para gestionar el sistema, incluyendo la administración de usuarios, roles y configuraciones críticas.";
     public static final String DESCRIPTION_ROLE_AUX_BODEGA = "Responsable de gestionar y organizar el inventario en bodega, asegurando la correcta recepción, almacenamiento y despacho de productos.";
     public static final String DESCRIPTION_ROLE_CLIENTE = "Usuario que puede navegar, seleccionar y comprar productos, además de gestionar sus pedidos y datos personales.";
+
+    public static final String AUTHORIZATION_HEADER  = "Authorization";
+    public static final String BEARER_HEADER  = "Bearer ";
 }
