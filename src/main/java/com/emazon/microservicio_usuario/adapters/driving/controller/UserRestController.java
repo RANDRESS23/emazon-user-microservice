@@ -28,8 +28,8 @@ public class UserRestController {
     private final IUserResponseMapper userResponseMapper;
     private final IRoleServicePort roleServicePort;
 
-    @PostMapping("/aux-bodega-user")
     @PreAuthorize(DrivingConstants.HAS_ROLE_ADMIN)
+    @PostMapping("/aux-bodega-user")
     public ResponseEntity<UserResponse> addAuxBodegaUser(@Valid @RequestBody AddUserRequest request) {
         User user = IUserRequestMapper.addRequestToUser(request);
         Role role = roleServicePort.getRole(RoleEnum.AUX_BODEGA);

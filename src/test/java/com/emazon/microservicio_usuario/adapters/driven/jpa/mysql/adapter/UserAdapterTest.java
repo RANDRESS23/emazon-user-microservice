@@ -4,6 +4,7 @@ import com.emazon.microservicio_usuario.adapters.driven.jpa.mysql.entity.Permiss
 import com.emazon.microservicio_usuario.adapters.driven.jpa.mysql.entity.RoleEntity;
 import com.emazon.microservicio_usuario.adapters.driven.jpa.mysql.entity.UserEntity;
 import com.emazon.microservicio_usuario.adapters.driven.jpa.mysql.exception.AlreadyExistsException;
+import com.emazon.microservicio_usuario.adapters.driven.jpa.mysql.mapper.IRoleEntityMapper;
 import com.emazon.microservicio_usuario.adapters.driven.jpa.mysql.mapper.IUserEntityMapper;
 import com.emazon.microservicio_usuario.adapters.driven.jpa.mysql.repository.IUserRepository;
 import com.emazon.microservicio_usuario.domain.enums.PermissionEnum;
@@ -30,6 +31,9 @@ class UserAdapterTest {
 
     @Mock
     private IUserEntityMapper userEntityMapper;
+
+    @Mock
+    private IRoleEntityMapper roleEntityMapper;
 
     @InjectMocks
     private UserAdapter userAdapter;

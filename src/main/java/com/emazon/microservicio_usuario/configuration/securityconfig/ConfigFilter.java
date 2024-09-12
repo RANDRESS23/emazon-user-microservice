@@ -1,6 +1,5 @@
 package com.emazon.microservicio_usuario.configuration.securityconfig;
 
-import com.emazon.microservicio_usuario.adapters.driven.jpa.mysql.repository.IUserRepository;
 import com.emazon.microservicio_usuario.configuration.securityconfig.jwtconfiguration.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +18,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class ConfigFilter {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final AuthenticationProvider authenticationProvider;
-    private final IUserRepository userRepository;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {

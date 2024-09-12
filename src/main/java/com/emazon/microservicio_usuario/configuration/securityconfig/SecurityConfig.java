@@ -1,6 +1,5 @@
 package com.emazon.microservicio_usuario.configuration.securityconfig;
 
-import com.emazon.microservicio_usuario.adapters.driven.jpa.mysql.repository.IUserRepository;
 import com.emazon.microservicio_usuario.configuration.securityconfig.jwtconfiguration.JwtAuthenticationFilter;
 import com.emazon.microservicio_usuario.configuration.securityconfig.jwtconfiguration.JwtService;
 import lombok.RequiredArgsConstructor;
@@ -10,19 +9,18 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @RequiredArgsConstructor
 public class SecurityConfig {
-    private final IUserRepository userRepository;
+    private final MyUserDetailsService myUserDetailsService;
     private final JwtService jwtService;
 
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
-        return new JwtAuthenticationFilter(jwtService, userDetailsService());
+        return new JwtAuthenticationFilter(jwtService, myUserDetailsService);
     }
 
     @Bean
@@ -33,14 +31,9 @@ public class SecurityConfig {
     @Bean
     public AuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService());
+        provider.setUserDetailsService(myUserDetailsService);
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
-    }
-
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return userEmail -> userRepository.findByEmail(userEmail).orElseThrow(()-> new RuntimeException("User not found"));
     }
 
     @Bean

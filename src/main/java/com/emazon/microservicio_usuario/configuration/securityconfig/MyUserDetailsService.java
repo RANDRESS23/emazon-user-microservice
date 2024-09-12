@@ -1,4 +1,4 @@
-package com.emazon.microservicio_usuario.adapters.driven.jpa.mysql.adapter;
+package com.emazon.microservicio_usuario.configuration.securityconfig;
 
 import com.emazon.microservicio_usuario.adapters.driven.jpa.mysql.entity.RoleEntity;
 import com.emazon.microservicio_usuario.adapters.driven.jpa.mysql.entity.UserEntity;
@@ -17,7 +17,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class UserDetailsAdapter implements UserDetailsService {
+public class MyUserDetailsService implements UserDetailsService {
     private final IUserRepository userRepository;
 
     @Override
@@ -28,7 +28,7 @@ public class UserDetailsAdapter implements UserDetailsService {
         List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
         RoleEntity role = userEntity.getRole();
 
-        authorityList.add(new SimpleGrantedAuthority(role.getName().name()));
+        authorityList.add(new SimpleGrantedAuthority("ROLE_" + role.getName().name()));
 
         role.getPermissionList().forEach(permission ->
                 authorityList.add(new SimpleGrantedAuthority(permission.getName().name()))
