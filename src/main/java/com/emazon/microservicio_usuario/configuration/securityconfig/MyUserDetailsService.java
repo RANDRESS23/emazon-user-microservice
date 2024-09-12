@@ -1,4 +1,4 @@
-package com.emazon.microservicio_usuario.adapters.driven.jpa.mysql.adapter;
+package com.emazon.microservicio_usuario.configuration.securityconfig;
 
 import com.emazon.microservicio_usuario.adapters.driven.jpa.mysql.entity.RoleEntity;
 import com.emazon.microservicio_usuario.adapters.driven.jpa.mysql.entity.UserEntity;
@@ -17,18 +17,18 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class UserDetailsAdapter implements UserDetailsService {
+public class MyUserDetailsService implements UserDetailsService {
     private final IUserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity userEntity = userRepository.findByDocument(username)
+        UserEntity userEntity = userRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException(DrivenConstants.USER_NOT_FOUND_MESSAGE));
 
         List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
         RoleEntity role = userEntity.getRole();
 
-        authorityList.add(new SimpleGrantedAuthority("ROLE_".concat(role.getName().name())));
+        authorityList.add(new SimpleGrantedAuthority("ROLE_" + role.getName().name()));
 
         role.getPermissionList().forEach(permission ->
                 authorityList.add(new SimpleGrantedAuthority(permission.getName().name()))

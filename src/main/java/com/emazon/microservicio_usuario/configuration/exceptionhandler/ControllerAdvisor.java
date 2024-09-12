@@ -7,6 +7,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -77,5 +78,19 @@ public class ControllerAdvisor {
         return ResponseEntity.badRequest().body(new ExceptionResponse(
                 String.format(exception.getMessage()),
                 HttpStatus.BAD_REQUEST.toString(), LocalDateTime.now()));
+    }
+
+    @ExceptionHandler(InvalidCredentials.class)
+    public ResponseEntity<ExceptionResponse> handleInvalidCredentials(InvalidCredentials exception) {
+        return ResponseEntity.badRequest().body(new ExceptionResponse(
+                String.format(exception.getMessage()),
+                HttpStatus.BAD_REQUEST.toString(), LocalDateTime.now()));
+    }
+
+    @ExceptionHandler(AuthorizationDeniedException.class)
+    public ResponseEntity<ExceptionResponse> handleAuthorizationDeniedException(AuthorizationDeniedException exception) {
+        return ResponseEntity.badRequest().body(new ExceptionResponse(
+                String.format(exception.getMessage()),
+                HttpStatus.FORBIDDEN.toString(), LocalDateTime.now()));
     }
 }
