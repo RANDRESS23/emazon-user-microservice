@@ -6,6 +6,7 @@ import com.emazon.microservicio_usuario.adapters.driven.jpa.mysql.mapper.IRoleEn
 import com.emazon.microservicio_usuario.adapters.driven.jpa.mysql.mapper.IUserEntityMapper;
 import com.emazon.microservicio_usuario.adapters.driven.jpa.mysql.repository.IRoleRepository;
 import com.emazon.microservicio_usuario.adapters.driven.jpa.mysql.repository.IUserRepository;
+import com.emazon.microservicio_usuario.adapters.driven.jpa.mysql.util.DrivenConstants;
 import com.emazon.microservicio_usuario.configuration.securityconfig.jwtconfiguration.JwtService;
 import com.emazon.microservicio_usuario.domain.model.User;
 import com.emazon.microservicio_usuario.domain.spi.IAuthPersistencePort;
@@ -57,8 +58,8 @@ public class AuthAdapter implements IAuthPersistencePort {
     private Map<String, Object> generateExtraClaims(User user) {
         Map<String, Object> extraClaims = new HashMap<>();
         RoleEntity roleEntity = roleRepository.findByName(user.getRole().getName()).orElseThrow();
-        extraClaims.put("userId", user.getUserId());
-        extraClaims.put("role", roleEntity.getName());
+        extraClaims.put(DrivenConstants.USER_ID_FIELD, user.getUserId());
+        extraClaims.put(DrivenConstants.ROLE_FIELD, roleEntity.getName());
         return extraClaims;
     }
 }
