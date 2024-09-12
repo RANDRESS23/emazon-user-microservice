@@ -9,7 +9,7 @@ import org.mapstruct.Mapper;
 public interface IUserEntityMapper {
     UserEntity toEntity(User user);
 
-    public static User toDomainModel(UserEntity userEntity, IRoleEntityMapper roleEntityMapper) {
+    static User toDomainModel(UserEntity userEntity, IRoleEntityMapper roleEntityMapper) {
         Role role = roleEntityMapper.toDomainModel(userEntity.getRole());
 
         return new User.UserBuilder()
