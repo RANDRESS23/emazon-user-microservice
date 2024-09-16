@@ -17,16 +17,17 @@ public class DrivingConstants {
 
     public static final String TAG_USER_NAME = "User Management";
     public static final String TAG_USER_DESCRIPTION = "Endpoints for managing users";
-    public static final String SWAGGER_REGISTER_WAREHOUSE_ASSISTANT_SUMMARY = "Register a new warehouse assistant";
-    public static final String SWAGGER_REGISTER_WAREHOUSE_ASSISTANT_RESPONSE = "Warehouse assistant has been registered";
-    public static final String SWAGGER_REGISTER_USER_EMAIL_EXISTS = "User with that email already exists";
-    public static final String SWAGGER_REGISTER_USER_IDENTITY_DOCUMENT_EXISTS = "User that identity document already exists";
-    public static final String SWAGGER_REGISTER_USER_UNDERAGE = "User is under aged";
-    public static final String SWAGGER_VALIDATIONS_DONT_PASS = "Some of the field doesn't pass validations";
+    public static final String SAVE_AUX_BODEGA_USER_SUMMARY = "Register a new warehouse assistant";
+    public static final String SAVE_AUX_BODEGA_USER_RESPONSE_201_DESCRIPTION = "Warehouse assistant has been registered";
+    public static final String SAVE_AUX_BODEGA_USER_RESPONSE_400_DESCRIPTION = "Invalid param";
+
+    public static final String SAVE_CLIENT_SUMMARY = "Register a new client";
+    public static final String SAVE_CLIENT_RESPONSE_201_DESCRIPTION = "Client has been registered";
+    public static final String SAVE_CLIENT_RESPONSE_400_DESCRIPTION = "Invalid param";
 
     public static final String TAG_AUTH_NAME = "Authentication";
     public static final String TAG_AUTH_DESCRIPTION = "Endpoints for user authentication";
-    public static final String SWAGGER_LOGIN_SUMMARY = "Search if the user Exists in database and give him a token";
-    public static final String SWAGGER_LOGIN_RESPONSE = "A token created with user information";
-    public static final String SWAGGER_LOGIN_ERROR = "User email or password is incorrect";
+    public static final String LOGIN_SUMMARY = "Search if the user Exists in database and give him a token";
+    public static final String LOGIN_RESPONSE_RESPONSE_200_DESCRIPTION = "A token created with user information";
+    public static final String LOGIN_ERROR_RESPONSE_400_DESCRIPTION = "User email or password is incorrect";
 }
