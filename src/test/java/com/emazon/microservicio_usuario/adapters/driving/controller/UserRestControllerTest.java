@@ -90,4 +90,49 @@ class UserRestControllerTest {
         // Assert
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
     }
+
+    @Test
+    void saveClient_shouldReturnCreatedUserResponse() {
+        // Arrange
+        Role role = new Role("Client", Set.of(new Permission(1L, PermissionEnum.READ)), RoleEnum.CLIENTE, 1L);
+        AddUserRequest addUserRequest = new AddUserRequest(
+                "John",
+                "Doe",
+                "123456789",
+                "1234567890",
+                "01/01/1990",
+                "johndoe@example.com",
+                "password123"
+        );
+        User user = new User.UserBuilder()
+                .userId(1L)
+                .name("John")
+                .lastName("Doe")
+                .document("123456789")
+                .phone("1234567890")
+                .birthdate(LocalDate.of(1990, 1, 1))
+                .email("johndoe@example.com")
+                .password("password123")
+                .role(role)
+                .build();
+        UserResponse expectedResponse = new UserResponse(
+                1L,
+                "John",
+                "Doe",
+                "123456789",
+                "1234567890",
+                LocalDate.of(1990, 1, 1),
+                "johndoe@example.com",
+                role
+        );
+
+        when(roleServicePort.getRole(RoleEnum.AUX_BODEGA)).thenReturn(role);
+        when(userResponseMapper.toUserResponse(user)).thenReturn(expectedResponse);
+
+        // Act
+        ResponseEntity<UserResponse> response = userRestController.addAuxBodegaUser(addUserRequest);
+
+        // Assert
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+    }
 }
