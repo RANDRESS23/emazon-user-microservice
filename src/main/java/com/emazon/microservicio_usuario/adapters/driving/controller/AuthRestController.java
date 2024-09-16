@@ -24,11 +24,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthRestController {
     private final IAuthServicePort authServicePort;
 
-    @Operation(summary = DrivingConstants.SWAGGER_LOGIN_SUMMARY)
+    @Operation(summary = DrivingConstants.LOGIN_SUMMARY)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = DrivingConstants.RESPONSE_CODE_200, description = DrivingConstants.SWAGGER_LOGIN_RESPONSE),
-            @ApiResponse(responseCode = DrivingConstants.RESPONSE_CODE_400, description = DrivingConstants.SWAGGER_LOGIN_ERROR),
-            @ApiResponse(responseCode = DrivingConstants.RESPONSE_CODE_400, description = DrivingConstants.SWAGGER_VALIDATIONS_DONT_PASS),
+            @ApiResponse(responseCode = DrivingConstants.RESPONSE_CODE_200, description = DrivingConstants.LOGIN_RESPONSE_RESPONSE_200_DESCRIPTION),
+            @ApiResponse(responseCode = DrivingConstants.RESPONSE_CODE_400, description = DrivingConstants.LOGIN_ERROR_RESPONSE_400_DESCRIPTION)
     })
     @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> login(@Valid @RequestBody AuthenticationRequest request) {
