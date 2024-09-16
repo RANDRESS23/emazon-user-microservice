@@ -3,7 +3,6 @@ package com.emazon.microservicio_usuario.adapters.driven.jpa.mysql.adapter;
 import com.emazon.microservicio_usuario.adapters.driven.jpa.mysql.entity.PermissionEntity;
 import com.emazon.microservicio_usuario.adapters.driven.jpa.mysql.entity.RoleEntity;
 import com.emazon.microservicio_usuario.adapters.driven.jpa.mysql.entity.UserEntity;
-import com.emazon.microservicio_usuario.adapters.driven.jpa.mysql.exception.AlreadyExistsException;
 import com.emazon.microservicio_usuario.adapters.driven.jpa.mysql.mapper.IRoleEntityMapper;
 import com.emazon.microservicio_usuario.adapters.driven.jpa.mysql.mapper.IUserEntityMapper;
 import com.emazon.microservicio_usuario.adapters.driven.jpa.mysql.repository.IUserRepository;
@@ -69,51 +68,6 @@ class UserAdapterTest {
         userEntity.setEmail("johndoe@example.com");
         userEntity.setRole(roleEntity);
         userEntity.setPassword("password123");
-    }
-
-    @Test
-    void saveUser_ShouldThrowException_WhenDocumentExists() {
-        // Arrange
-        when(userRepository.findByDocument(user.getDocument())).thenReturn(Optional.of(userEntity));
-
-        // Act & Assert
-        assertThrows(AlreadyExistsException.class, () -> userAdapter.saveUser(user));
-    }
-
-    @Test
-    void saveUser_ShouldThrowException_WhenEmailExists() {
-        // Arrange
-        when(userRepository.findByDocument(user.getDocument())).thenReturn(Optional.empty());
-        when(userRepository.findByEmail(user.getEmail())).thenReturn(Optional.of(userEntity));
-
-        // Act & Assert
-        assertThrows(AlreadyExistsException.class, () -> userAdapter.saveUser(user));
-    }
-
-    @Test
-    void saveUser_ShouldThrowException_WhenPhoneExists() {
-        // Arrange
-        when(userRepository.findByDocument(user.getDocument())).thenReturn(Optional.empty());
-        when(userRepository.findByEmail(user.getEmail())).thenReturn(Optional.empty());
-        when(userRepository.findByPhone(user.getPhone())).thenReturn(Optional.of(userEntity));
-
-        // Act & Assert
-        assertThrows(AlreadyExistsException.class, () -> userAdapter.saveUser(user));
-    }
-
-    @Test
-    void saveUser_ShouldSaveUser_WhenNoConflictsExist() {
-        // Arrange
-        when(userRepository.findByDocument(user.getDocument())).thenReturn(Optional.empty());
-        when(userRepository.findByEmail(user.getEmail())).thenReturn(Optional.empty());
-        when(userRepository.findByPhone(user.getPhone())).thenReturn(Optional.empty());
-        when(userEntityMapper.toEntity(user)).thenReturn(userEntity);
-
-        // Act
-        userAdapter.saveUser(user);
-
-        // Assert
-        verify(userRepository).save(userEntity);
     }
 
     @Test

@@ -1,5 +1,6 @@
 package com.emazon.microservicio_usuario.domain.api.usecase;
 
+import com.emazon.microservicio_usuario.domain.api.IRoleServicePort;
 import com.emazon.microservicio_usuario.domain.enums.PermissionEnum;
 import com.emazon.microservicio_usuario.domain.enums.RoleEnum;
 import com.emazon.microservicio_usuario.domain.exception.AlreadyExistsFieldException;
@@ -30,6 +31,9 @@ class UserUseCaseTest {
 
     @Mock
     private IEncryptionPersistencePort encryptionPersistencePort;
+
+    @Mock
+    private IRoleServicePort roleServicePort;
 
     @Mock
     private UserValidation userValidation;
