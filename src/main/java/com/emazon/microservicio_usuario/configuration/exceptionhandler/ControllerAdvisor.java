@@ -2,6 +2,7 @@ package com.emazon.microservicio_usuario.configuration.exceptionhandler;
 
 import com.emazon.microservicio_usuario.configuration.Constants;
 import com.emazon.microservicio_usuario.domain.exception.*;
+import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -27,7 +28,7 @@ public class ControllerAdvisor {
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ExceptionResponse> handleNotFoundException(NotFoundException exception) {
         return ResponseEntity.badRequest().body(new ExceptionResponse(
-                String.format(Constants.NOT_FOUND_EXCEPTION_MESSAGE, exception.getMessage()),
+                String.format(exception.getMessage()),
                 HttpStatus.NOT_FOUND.toString(), LocalDateTime.now()));
     }
 
@@ -41,14 +42,14 @@ public class ControllerAdvisor {
     @ExceptionHandler(AlreadyExistsFieldException.class)
     public ResponseEntity<ExceptionResponse> handleAlreadyExistsFieldException(AlreadyExistsFieldException exception) {
         return ResponseEntity.badRequest().body(new ExceptionResponse(
-                String.format(Constants.ALREADY_EXISTS_EXCEPTION_MESSAGE, exception.getMessage()),
+                String.format(exception.getMessage()),
                 HttpStatus.BAD_REQUEST.toString(), LocalDateTime.now()));
     }
 
     @ExceptionHandler(MaxLengthException.class)
     public ResponseEntity<ExceptionResponse> handleMaxLengthException(MaxLengthException exception) {
         return ResponseEntity.badRequest().body(new ExceptionResponse(
-                String.format(Constants.MAXIMUM_CHARACTERS_EXCEPTION_MESSAGE, exception.getMessage()),
+                String.format(exception.getMessage()),
                 HttpStatus.BAD_REQUEST.toString(), LocalDateTime.now()));
     }
 
@@ -71,6 +72,13 @@ public class ControllerAdvisor {
         return ResponseEntity.badRequest().body(new ExceptionResponse(
                 String.format(exception.getMessage()),
                 HttpStatus.BAD_REQUEST.toString(), LocalDateTime.now()));
+    }
+
+    @ExceptionHandler(ExpiredJwtException.class)
+    public ResponseEntity<ExceptionResponse> handleExpiredJwtException(ExpiredJwtException exception) {
+        return ResponseEntity.badRequest().body(new ExceptionResponse(
+                String.format(exception.getMessage()),
+                HttpStatus.NOT_FOUND.toString(), LocalDateTime.now()));
     }
 
     @ExceptionHandler(NullPointerException.class)
